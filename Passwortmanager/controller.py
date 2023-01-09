@@ -63,59 +63,83 @@ class Controller:
                 case 2:
                       self.write_file()
                 case 3:
+                    self.delete_pass()
+                case 4:
                     self.delete_file()
-                # case 4:
-                #      self.update_file()
                 case 5:
                         exit() 
         def __read_startup_menu_action(self):
             self.__action = int(input("Was möchten Sie tun? "))
-           # self.switch_db_menu_action()
-           # show_db_menu(self.__outer.get_db_name())
+
             
         def create_new_database(self):
             self.__outer.set_db_name(input("Name der neuen Datenbank: "))
-            #db_name = input("Name der neuen Datenbank: ")
             my_file = open( str(self.__outer.get_db_name()), "w+")
             my_file.close()
             database_menu(self.__outer.get_db_name())
             self.__read_startup_menu_action()
-            print()
             self.switch_db_menu_action()
-            print()
+    
         
     
         def use_existing_database(self):
             self.__outer.set_db_name(input("Name der Datenbank: "))
-           # my_file = open( str(self.__outer.get_db_name()), "r+")
-            #my_file.close()
             database_menu(self.__outer.get_db_name())
             self.__read_startup_menu_action()
-            print()
             self.switch_db_menu_action()
-            print()
+ 
             
     
         def write_file(self):
             my_file = open(str(self.__outer.get_db_name()), "a+")
-            my_file.writelines("username: " + str(input("username: ")))
+           
+            my_file.writelines("index: " + str(input("index: ")))
+            my_file.writelines("  username: " + str(input("username: ")))
             my_file.writelines("  password: " +str(input("password: ")))
             my_file.write('\n')
             my_file.close()
             print("------------")
-            print("fertig")
+            print("fertig") 
+            database_menu(self.__outer.get_db_name()) 
+            self.__read_startup_menu_action()
+            self.switch_db_menu_action()
             
         
         def read_file(self):
-            print("existierende Passwörter")
+            print("existierende Passwörter:")
             my_file = open(str(self.__outer.get_db_name()), "r+")
             print(my_file.read())
+            database_menu(self.__outer.get_db_name())
+            self.__read_startup_menu_action()
+            self.switch_db_menu_action()
                
+        def delete_pass(self):
+            print("existierende Passwörter:")
+            my_file = open(str(self.__outer.get_db_name()), "r+")
+            print(my_file.read())
+            lines = []
+            with open(str(self.__outer.get_db_name()), 'r') as fp:
+                  #print(fp.read())
+                  lines = fp.readlines()  
+            with open(str(self.__outer.get_db_name()), 'w') as fp:
+                index = int(input("Welche Zeile wollen Sie löschen? "))     
+                for number, line in enumerate(lines):
+                    if number not in [index]:
+                       fp.write(line)
+            print("Löschung") 
+            print("------------")
+            print("fertig")
+            database_menu(self.__outer.get_db_name())
+            self.__read_startup_menu_action()
+            self.switch_db_menu_action()
+        
+        
         def delete_file(self):
             print("Löschung")
             os.remove(str(self.__outer.get_db_name()))
             print("------------")
-            print("fertig")
+            print("fertig") 
+            
             
             
         # def update_file():

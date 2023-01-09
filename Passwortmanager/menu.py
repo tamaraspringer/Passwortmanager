@@ -12,7 +12,7 @@ def database_menu(databank_name):
         print("=============================================")
         print("  1) Bereits existierende Passwörter anzeigen")
         print("  2) Neues Passwort hinzufügen")
-        print("  3) Bereits existierende Passwörter löschen")
-      #  print("  4) Passwort aktualisieren")
+        print("  3) Bereits existierendes Passwort löschen")
+        print("  4) Bereits existierende Passwortdatenbank löschen")
         print("  5) Beenden\n")
         
